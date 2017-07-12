@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>login</title>
+ </head>
+ <body>
+ <div>
+	 站牌ID：<input type="text" id="zpid"><br><br> 
+	 <button type="submit" id="query" value="Submit">查询</button>
+	 文字显示：<input type="text" id="mess"><br><br>
+	 <button type="submit" id="cli" value="Submit">提交</button>
+ </div>
+ <script type="text/javascript" src="http://127.0.0.1:8888/jquery"></script>
+ <script>
+ $('#query').click(function(){
+  $.ajax({
+			dataType: "json",
+			url: "http://127.0.0.1:8888/query?id="+$('#zpid').val(),
+			timeout: 5000,
+			xhrFields: {withCredentials:true},
+			crossDomain: true,
+			success: function(j){alert(j.data);},
+			error: function(){
+				alert('error');
+			}
+		});
+
+ });
+  $('#cli').click(function(){
+  $.ajax({
+			dataType: "json",
+			url: "http://127.0.0.1:8888/login/check?text="+$('#mess').val()+"&id="+$('#zpid').val(),
+			timeout: 5000,
+			xhrFields: {withCredentials:true},
+			crossDomain: true,
+			success: function(j){alert(j.data);},
+			error: function(){
+				alert('error');
+			}
+		});
+
+ });
+</script>
+ </body>
+</html>
