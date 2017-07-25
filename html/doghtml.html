@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+<title>电子公交站牌</title>
+<style type="text/css">
+  body {
+	font-family: Helvetica,STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Arial;
+	font-size: 24px;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width:900px;
+	height:1600px;
+	background-color: #fff;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none; /*--设置或检索是否允许用户选中文本。--*/
+	hutia:expression(this.onselectstart=function(){return(false)});
+	-webkit-overflow-scrolling: touch;/*-----解决滚动不流畅问题----*/
+
+}
+.head_row{
+	height:360px;
+}
+.video{
+	width:70%;
+	float:left;
+}
+.weather_time{
+font-size: 16px;
+	float:left;
+	width:30%;
+	text-align: center;
+	color:#0578c5;
+}
+.video_vi{
+	width:100%;
+}
+.time_show{
+	font-size: 16px;
+	height:250px;
+	color:#0578c5;
+	text-align: center;
+}
+.station_row{
+	height:200px;
+	border-top:8px solid #fff;
+	background-color: #0578c5;
+	color: #fff;
+}
+.station_item{
+	height:92px;
+	border-bottom:8px solid #fff;
+	border-right:8px solid #fff;
+	background-color: #0578c5;
+	color: #fff;
+	line-height:92px;
+	font-size: 44px;
+	float:left;
+	width:46.87%;
+	padding:0 10px;
+}
+.float_left{
+	float:left;
+}
+.float_right{
+	float:right;
+}
+.line_item{
+	height:250px;
+}
+.line_info{
+	background-color: rgba(2, 31, 93, 0.8);
+	width:25%;
+}
+.line_num{
+	height:140px;
+}
+.line_num div{
+	font-size: 64px;
+	background-color:#fff;
+	border-radius: 130px;
+	line-height:130px;
+	width:80%;
+	margin:20px 10% 0px 10%;
+	text-align: center;
+	color:#f00;
+	height:130px;
+}
+.line_time{
+	font-size: 14px;
+	line-height:16px;
+	width:73%;
+	margin:5px 5% 5px 22%;
+	color:#fff;
+	clear:both;
+}
+.line_timeInfo{
+	height:70px;
+	margin-top:20px;
+}
+.line_sta{
+	width:75%;
+}
+.line_other{
+	font-size: 16px;
+	width:100%;
+	background-color:#f00;
+	height:30px;
+	line-height:30px;
+	text-align: center;
+	color:#fff;
+}
+.line_line{
+	border-top:2px solid #000;
+	height:193px;
+	margin:25px 5% 0px 5%;
+	width:90%;
+}
+.line_staItem{
+	width:10%;
+	float:left;
+}
+.line_staItem_text{
+	width:16px;
+	line-height:20px;
+	font-size: 16px;
+	margin-top:5px;
+}
+.sta_black{
+	width:13px;
+	height:13px;
+	border-radius: 13px;
+	background-color:#000;
+	display:block;
+	margin-top:-7px;
+}
+.sta_red{
+	width:17px;
+	height:17px;
+	border-radius: 17px;
+	background-color:#f00;
+	display:block;
+	margin-top:-9px;
+}
+.text_red{
+	color:#f00;
+}
+.line_item{
+	margin-top:5px;
+}
+.sta_time{
+	margin-left:-42px;
+}
+</style>
+</head>
+<body>
+<div class="head_row">
+	<div class="video">
+		<video autoplay="autoplay" loop="loop" class="video_vi">
+			<source src="./video/test.mp4" type="video/mp4"/>
+		</video>
+	</div>
+	<div class="weather_time">
+		<div class="time_show">
+			<canvas id="clock" width="200" height="200">
+				你的浏览器不支持canvas标签，无法看到时钟。
+			</canvas>
+			<div id="time_div"></div>
+			<div id="week_div"></div>
+		</div>
+		<div class="weather_info"><div><img src="./images/ico03.png"></div><div>28℃~33℃  阴</div><!--<div>阴</div>--></div>
+	</div>
+</div>
+<div class="station_row">
+	<div class="station_item">
+		<span class="float_left">8路</span><span class="float_right">未发车</span>
+	</div>
+	<div class="station_item">
+		<span class="float_left">8路</span><span class="float_right">未发车</span>
+	</div>
+	<div class="station_item">
+		<span class="float_left">8路</span><span class="float_right">未发车</span>
+	</div>
+	<div class="station_item">
+		<span class="float_left">8路</span><span class="float_right">未发车</span>
+	</div>
+</div>
+
+<div class="line_row">
+	<div class="line_item">
+		<div class="line_info float_left">
+			<div class="line_num"><div>3</div></div>
+			<div class="line_timeInfo">
+				<div class="line_time"><span class="sta_time float_left">首班：轮渡公交车站</span><span class="float_right">06:30</span></div>
+				<div class="line_time"><span class="float_left">软件园</span><span class="float_right">06:00</span></div>
+				<div class="line_time"><span class="sta_time float_left">末班：轮渡公交车站</span><span class="float_right">23:00</span></div>
+				<div class="line_time"><span class="float_left">软件园</span><span class="float_right">21:00</span></div>
+			</div>
+		</div>
+		<div class="line_sta float_left">
+			<div class="line_staInfo">
+				<div class="line_line">
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">轮渡公交车站</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_red"></span><div class="line_staItem_text text_red">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园</div></div>
+				</div>
+			</div>
+			<div class="line_other">轮渡公交车站 －－＞ 软件园&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下一站 软件园</div>
+		</div>
+	</div>
+	<div class="line_item">
+		<div class="line_info float_left">
+			<div class="line_num"><div>123</div></div>
+			<div class="line_timeInfo">
+				<div class="line_time"><span class="sta_time float_left">首班：轮渡公交车站</span><span class="float_right">06:30</span></div>
+				<div class="line_time"><span class="float_left">软件园</span><span class="float_right">06:00</span></div>
+				<div class="line_time"><span class="sta_time float_left">末班：轮渡公交车站</span><span class="float_right">23:00</span></div>
+				<div class="line_time"><span class="float_left">软件园</span><span class="float_right">21:00</span></div>
+			</div>
+		</div>
+		<div class="line_sta float_left">
+			<div class="line_staInfo">
+				<div class="line_line">
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_red"></span><div class="line_staItem_text text_red">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+				</div>
+			</div>
+			<div class="line_other">轮渡公交车站 －－＞ 软件园&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下一站 软件园</div>
+		</div>
+	</div>
+	<div class="line_item">
+		<div class="line_info float_left">
+			<div class="line_num"><div>23</div></div>
+			<div class="line_timeInfo">
+				<div class="line_time"><span class="sta_time float_left">首班：轮渡公交车站</span><span class="float_right">06:30</span></div>
+				<div class="line_time"><span class="float_left">软件园</span><span class="float_right">06:00</span></div>
+				<div class="line_time"><span class="sta_time float_left">末班：轮渡公交车站</span><span class="float_right">23:00</span></div>
+				<div class="line_time"><span class="float_left">软件园</span><span class="float_right">21:00</span></div>
+			</div>
+		</div>
+		<div class="line_sta float_left">
+			<div class="line_staInfo">
+				<div class="line_line">
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_red"></span><div class="line_staItem_text text_red">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+				</div>
+			</div>
+			<div class="line_other">轮渡公交车站 －－＞ 软件园&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下一站 软件园</div>
+		</div>
+	</div>
+	<div class="line_item">
+		<div class="line_info float_left">
+			<div class="line_num"><div>23</div></div>
+			<div class="line_timeInfo">
+				<div class="line_time"><span class="sta_time float_left">首班：轮渡公交车站</span><span class="float_right">06:30</span></div>
+				<div class="line_time"><span class="float_left">软件园</span><span class="float_right">06:00</span></div>
+				<div class="line_time"><span class="sta_time float_left">末班：轮渡公交车站</span><span class="float_right">23:00</span></div>
+				<div class="line_time"><span class="float_left">软件园</span><span class="float_right">21:00</span></div>
+			</div>
+		</div>
+		<div class="line_sta float_left">
+			<div class="line_staInfo">
+				<div class="line_line">
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_red"></span><div class="line_staItem_text text_red">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div><div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+					<div class="line_staItem"><span class="sta_black"></span><div class="line_staItem_text">软件园东二门</div></div>
+				</div>
+			</div>
+			<div class="line_other">轮渡公交车站 －－＞ 软件园&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下一站 软件园</div>
+		</div>
+	</div>
+</div>
+
+<!--<canvas id="clock" width="500" height="500">
+你的浏览器不支持canvas标签，无法看到时钟。
+</canvas>-->
+<script type="text/javascript" src="./js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="./js/sd.js"></script>
+<script type="text/javascript">
+var clock=document.getElementById("clock");
+var cxt=clock.getContext('2d');
+function drawclock(){
+//清除画布
+cxt.clearRect(0,0,200,200);
+var now=new Date();
+var sec=now.getSeconds();
+var min=now.getMinutes();
+var hour=now.getHours();
+hour=hour+min/60;
+//将小时转换为12小时
+hour=hour>12?hour-12:hour;
+
+
+//表盘
+cxt.beginPath();
+cxt.lineWidth=5;
+cxt.strokeStyle="red";
+cxt.arc(100,100,90,0,360,false);
+cxt.stroke();
+cxt.closePath();
+
+//刻度
+//时刻度
+for(var i=0;i<12;i++){
+cxt.save();
+cxt.lineWidth=5;
+cxt.strokeStyle="black";
+cxt.translate(100,100);//设置0，0点
+cxt.rotate(i*30*Math.PI/180);
+cxt.beginPath();
+cxt.moveTo(0,-75);
+cxt.lineTo(0,-85);
+cxt.closePath();
+cxt.stroke();
+cxt.restore();
+}
+//分刻度
+for( var i=0;i<60;i++){
+cxt.save();
+cxt.lineWidth=2;
+cxt.strokeStyle="black";
+cxt.translate(100,100);
+cxt.rotate(i*6*Math.PI/180);
+cxt.beginPath();
+cxt.moveTo(0,-80);
+cxt.lineTo(0,-85);
+cxt.closePath();
+cxt.stroke();
+cxt.restore();	
+}
+
+//时针
+//设置时针风格
+cxt.save();
+cxt.lineWidth=5;
+cxt.beginPath();
+cxt.strokeStyle="black";
+cxt.translate(100,100);
+cxt.rotate(hour*30*Math.PI/180);
+cxt.beginPath();
+cxt.moveTo(0,-30);
+cxt.lineTo(0,18);
+cxt.closePath();
+cxt.stroke();
+cxt.restore();
+
+//分针
+cxt.save();
+cxt.lineWidth=3;
+cxt.beginPath();
+cxt.strokeStyle="black";
+cxt.translate(100,100);
+cxt.rotate(min*6*Math.PI/180);
+cxt.beginPath();
+cxt.moveTo(0,-50);
+cxt.lineTo(0,18);
+cxt.closePath();
+cxt.stroke();
+cxt.restore();
+//秒针
+cxt.save();
+cxt.lineWidth=1;
+cxt.beginPath();
+cxt.strokeStyle="red";
+cxt.translate(100,100);
+cxt.rotate(sec*6*Math.PI/180);
+cxt.beginPath();
+cxt.moveTo(0,-63);
+cxt.lineTo(0,18);
+cxt.closePath();
+cxt.stroke();
+//画出时针，分针，秒针交叉点
+cxt.beginPath();
+cxt.fillStyle="gray";
+cxt.strokeStyle="red";
+cxt.arc(0,0,5,0,360,false);
+cxt.fill();
+cxt.closePath();
+cxt.stroke();
+
+cxt.beginPath();
+cxt.fillStyle="gray";
+cxt.strokeStyle="red";
+cxt.arc(0,-50,2,0,360,false);
+cxt.fill();
+cxt.closePath();
+cxt.stroke();
+cxt.restore();
+}
+drawclock();
+//实验setINterval
+setInterval(drawclock,1000);
+</script>
+</body>
+</html>

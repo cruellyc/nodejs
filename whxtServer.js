@@ -6,11 +6,9 @@ const HOST = '10.16.8.22';
 const PORT = 6969;
 const file=__dirname+"/doc/ipjson.txt";
 var idmap=[];
-var showText=[];
-var showData=[];
 //logger
-/*log4js.configure({
-	appenders: [
+log4js.configure({
+	"appenders": [
 		{type: 'file', filename: '/log/gjzptcp.log', category: 'gtcp'},
 		{type: 'file', filename: '/log/gjzphttp.log', category: 'ghttp'},
 		{type: 'console'}
@@ -18,9 +16,9 @@ var showData=[];
 	replaceConsole: true
 });
 var logtcp = log4js.getLogger('gtcp');
-var loghttp = log4js.getLogger('ghttp');*/
-var logtcp = console;
-var loghttp = console;
+var loghttp = log4js.getLogger('ghttp');
+//var logtcp = console;
+//var loghttp = console;
 //读取文件
 jsonToMap();
 //读取站牌id信息保存到map中
@@ -31,7 +29,7 @@ function jsonToMap(){
 	for(var i=0;i<result.data.length;i++){
 		var obj=result.data[i];
 		logtcp.info('===id:'+obj.id);
-		idmap[obj.id]=obj.ip;
+		idmap[obj.id]=null;
 	}
 	logtcp.info('===jsonToMap end===');
 }

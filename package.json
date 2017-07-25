@@ -1,0 +1,15 @@
+{
+    "name": "ssdog",
+    "version": "0.0.1",
+    "description": "电子公交站牌狗",
+    "main": "whxtServer.js",
+    "dependencies": {
+        "log4js": "1.1.1",
+    },
+    "author": "arlen.yeh",
+    "license": "ISC",
+    "engines": {
+        "node": "6.10.3",
+        "npm": "3.10.10"
+    }
+}

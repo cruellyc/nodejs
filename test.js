@@ -4,7 +4,7 @@ var uptime=os.uptime();
 console.log("uptime:"+uptime);
 var freemem=os.freemem()
 console.log("freemem:"+freemem);
-/*setInterval(function(){
+setInterval(function(){
 	if(flag){
 		const net = require('net');
 		//连接服务器
@@ -36,4 +36,4 @@ console.log("freemem:"+freemem);
 			console.log('eee ' + err.code + ':' + err.name + ':' + err.message);
 		});
 	}
-}, 1000);*/
+}, 1000);
